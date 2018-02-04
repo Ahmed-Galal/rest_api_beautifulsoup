@@ -137,20 +137,20 @@ class Send(models.Model):
 
 # Create your models here.
 class Region(models.Model):
-    date = models.DateTimeField(verbose_name= 'Date')
-    price = models.IntegerField(verbose_name= 'Prix')
-    code_postal = models.IntegerField(verbose_name= 'Code Postal')
-    price_msquare = models.IntegerField(verbose_name= 'Prix m2')
+    date = models.CharField(max_length=100,verbose_name= 'Date')
+    price = models.CharField(max_length=100,verbose_name= 'Prix')
+    code_postal = models.CharField(max_length=100,verbose_name= 'Code Postal')
+    price_msquare = models.CharField(max_length=100,verbose_name= 'Prix m2')
     place = models.CharField(max_length=50,verbose_name= 'Lieu')
     typeImo = models.CharField(max_length=100,verbose_name= 'Titre')
-    size = models.IntegerField(verbose_name= 'M2')
+    size = models.CharField(max_length=100,verbose_name= 'M2')
     charac = models.CharField(max_length=100,verbose_name= 'Autre')
     description = models.CharField(max_length=1000,verbose_name= 'Description')
     link = models.CharField(max_length=300,unique=True,verbose_name= 'Lien')
     website = models.CharField(max_length=100,verbose_name= 'Source')
     image = models.CharField(max_length=100,verbose_name= 'Photo')
-    idannonce = models.IntegerField()
-    phone_number = models.IntegerField(verbose_name= 'Telephone')
+    idannonce = models.CharField(max_length=100,)
+    phone_number = models.CharField(max_length=100,verbose_name= 'Telephone')
     def save(self, *args, **kwargs):
         try:
             self.price_msquare = self.price/self.size

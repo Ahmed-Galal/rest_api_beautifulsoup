@@ -14,7 +14,9 @@ class Util():
         return False
 
     def fixString(self,txt):
-        return re.sub("'", '`', txt)
+        txt = re.sub("'", '`', txt)
+        # txt = re.sub("\n", '', txt)
+        return txt
 
     def getUrl(self,url):
         print("===getUrl==")
@@ -22,18 +24,17 @@ class Util():
         response = urllib2.urlopen(url)
         html = response.read()
         soup = BeautifulSoup(html, 'html.parser')
-        print("========soup")
         return soup
 
     def item_json_object(self,item):
         data = {
-            'availabilityStarts': self.fixString(item.find('p', itemprop='availabilityStarts').string.encode('utf-8')),
-            'description': self.fixString(item.find('p', itemprop='description').string.encode('utf-8')),
-            'city': self.fixString(item.find('span', itemprop='address').string.encode('utf-8')),
-            'Honoraires': item.find(text=re.compile('Honoraires')).parent.next_sibling.string.encode('utf-8'),
-            'Reference': item.find(text=re.compile('Reference')).parent.next_sibling.string.encode('utf-8'),
-            'GES': item.find(text=re.compile('GES')).parent.next_sibling.string.encode('utf-8'),
-            'Classe_energie': item.find(text=re.compile('Classe energie')).parent.next_sibling.string.encode('utf-8')
+            'availabilityStarts': self.fixString(item.find('p', itemprop='availabilityStarts').text) if item.find('p', itemprop='availabilityStarts') else '',
+            'description': self.fixString(item.find('p', itemprop='description').text) if item.find('p', itemprop='description') else '',
+            'city': self.fixString(item.find('span', itemprop='address').text) if item.find('span', itemprop='address') else '',
+            'Honoraires': item.find('span',text=re.compile('Honoraires')).find_next_sibling("span").text if item.find('span',text=re.compile('Honoraires')) else '',
+            'Reference': item.find('span',text=re.compile('rence')).find_next_sibling("span").text if item.find('span',text=re.compile('rence')) else '',
+            'GES': item.find('span',text=re.compile('GES')).find_next_sibling("span").text if item.find('span',text=re.compile('GES')) else '',
+            'Classe_energie': item.find('span',text=re.compile('nergie')).find_next_sibling("span").text if item.find('span',text=re.compile('nergie')) else ''
         }
         return data
 
@@ -43,18 +44,18 @@ class Util():
         item_json = self.item_json_object(soup.find('section', class_="adview_main"))
         data = {
             "img": self.fixString(item.find('span', class_='lazyload').get('data-imgsrc') if item.find(self.has_img) else ''),
-            "title": self.fixString(item.find('h2', class_='item_title').string.encode('utf-8')),
-            "price": self.fixString(item.find('h3', class_='item_price').string.encode('utf-8')),
-            "date": self.fixString(item.find('p', itemprop='availabilityStarts').get('content').string.encode('utf-8')),
-            "id": self.fixString(item.find('div', class_='saveAd').get('data-savead-id').encode('utf-8')),
+            "title": self.fixString(item.find('h2', class_='item_title').text) if item.find('h2', class_='item_title') else '',
+            "price": self.fixString(item.find('h3', class_='item_price').text) if item.find('h3', class_='item_price') else '',
+            "date": self.fixString(item.find('p', itemprop='availabilityStarts').get('content')) if item.find('p', itemprop='availabilityStarts') else '',
+            "id": self.fixString(item.find('div', class_='saveAd').get('data-savead-id')) if item.find('div', class_='saveAd') else '',
             "url": i_url,
-            'availabilityStarts': item_json.availabilityStarts,
-            'description': item_json.description,
-            'city': item_json.address,
-            'postal_code': item_json.address.split(' ')[1],
-            'Honoraires': item_json.Honoraires,
-            'Reference': item_json.Reference,
-            'GES': item_json.GES,
-            'Classe_energie': item_json.Classe_energie,
+            'availabilityStarts': item_json['availabilityStarts'],
+            'description': item_json['description'],
+            'city': item_json['city'],
+            'postal_code': item_json['city'].split(' ')[1] if item_json['city'] else '',
+            'Honoraires': item_json['Honoraires'],
+            'Reference': item_json['Reference'],
+            'GES': item_json['GES'],
+            'Classe_energie': item_json['Classe_energie'],
         }
         return data

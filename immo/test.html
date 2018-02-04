@@ -1,0 +1,68 @@
+<section class="adview_main">
+    <div class="item_image big popin-open trackable"
+         data-info='{"event_name" : "ad_view::zoom_photos", "event_type" : "click", "click_type" : "N", "event_s2" : "2"}'
+         data-popin-content="https://img1.leboncoin.fr/ad-large/de306f6e1b5818f5a6ea1bad7b65399420d3f2df.jpg"
+         data-popin-type="image" id="item_image">
+        <span class="lazyload" data-imgalt="ENTREPOT et BUREAUX"
+              data-imgsrc="https://img1.leboncoin.fr/ad-image/de306f6e1b5818f5a6ea1bad7b65399420d3f2df.jpg"
+              style="display:block; width:100%; height:100%;"></span>
+        <p class="item_imageCaption">ENTREPOT et BUREAUX</p>
+        <div class="layout loader hidden">
+            <span class="loader-gif"></span>
+        </div>
+        <div class="interstitial hidden" id="adview_interstitial">
+            <div class="container">
+                <p class="mbl">Contactez le vendeur pour plus d'informations :</p>
+                <a class="button-blue mts skip_interstitial mw trackable"
+                   data-info='{"event_name" : "ad_reply::email::envoyer_email", "event_type" : "load", "event_s2" : "4"}'
+                   href="//www.leboncoin.fr/ar?ca=12_s&amp;id=1376540195" id="adview_interstitial_link"
+                   rel="nofollow"><i class="icon-email icon-1-8x skip_interstitial"></i>Envoyer un email</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        var lazyloadAdviewMain = new Lazyload(".item_image.big", 2, "//static.leboncoin.fr/img/no-picture.png");
+    </script>
+    <section class="carousel">
+        <div class="thumbnails" data-alt="ENTREPOT et BUREAUX">
+            <ul>
+                <li class="thumb selected trackable"
+                    data-info='{"event_name" : "ad_view::photos", "event_type" : "click", "click_type" : "N", "event_s2" : "2"}'
+                    id="thumb_0"></li>
+                <li class="thumb trackable"
+                    data-info='{"event_name" : "ad_view::photos", "event_type" : "click", "click_type" : "N", "event_s2" : "2"}'
+                    id="thumb_1"></li>
+            </ul>
+        </div>
+    </section>
+    <p class="item_photo">2 photos disponibles</p>
+    <script>
+
+        var images = new Array(), images_thumbs = new Array();
+        images_thumbs[0] = "https://img1.leboncoin.fr/ad-thumb/de306f6e1b5818f5a6ea1bad7b65399420d3f2df.jpg";
+        images[0] = "https://img1.leboncoin.fr/ad-large/de306f6e1b5818f5a6ea1bad7b65399420d3f2df.jpg";
+        images_thumbs[1] = "https://img2.leboncoin.fr/ad-thumb/ff6231b61e630c2142c5eaa8fd0d5959c965eaa0.jpg";
+        images[1] = "https://img2.leboncoin.fr/ad-large/ff6231b61e630c2142c5eaa8fd0d5959c965eaa0.jpg";
+
+
+        var interstitial_active = false, interstitial_trigger_number = 3, carouselAdview = null;
+
+        jQuery(document).ready(function () {
+            var interstitial_adview = document.getElementById('adview_interstitial');
+            $('#item_image').attr('data-popin-cancelClick', 'adview_interstitial_button,adview_interstitial_link');
+            carouselAdview = new CarouselInterstitial("#adview", ".item_image.big", "thumbnails", images, images_thumbs, 3, 755, 485, 172, 118, interstitial_adview, interstitial_trigger_number);
+            carouselAdview.init();
+        });
+    </script>
+    <section class="properties lineNegative">
+        <div class="apn-vp">
+            <div class="teal-apn" id="vp1-s"></div>
+            <div class="teal-apn" id="vp1-m"></div><!--
+    --<div id="vp2-m" class="teal-apn"></div>-->
+        </div>
+        <p class="line line_pro" content="2018-01-29" itemprop="availabilityStarts">Mise en ligne le 29 janvier à
+            10:13</p>
+        <div class="line line_pro noborder">
+            <p></p></div>
+    </section>
+</section>
