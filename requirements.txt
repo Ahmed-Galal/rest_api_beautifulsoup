@@ -1,0 +1,9 @@
+Django==1.11
+django-common==0.1.51
+django-cors-headers==2.1.0
+djangorestframework==3.6.4
+requests==2.18.4
+django-filter==1.1.0
+django-filters==0.2.1
+beautifulsoup4==4.6.0
+bs4==0.0.1
